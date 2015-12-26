@@ -1,5 +1,5 @@
 'use strict'
-var fjuApp = angular.module('landingpage',['ngMaterial', 'ngRoute', 'landingPageController','fjuServices']);
+var fjuApp = angular.module('landingpage',['ngMaterial', 'ngRoute', 'landingPageController', 'fjuServices', 'fjuDirectives', 'ngMessages']);
 
 fjuApp.config(function($interpolateProvider) {
 	$interpolateProvider.startSymbol('{[{');

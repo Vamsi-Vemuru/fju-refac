@@ -3,7 +3,6 @@
       <md-card>
         <md-content class="md-padding">
           <span class="md-title">{[{ degreeTitle }]}</span>
-        
           <span class="md-subhead">
             <p align="left">{[{ degreeDesc }]}</p>
           </span>
@@ -34,10 +33,9 @@
           <md-content class="md-padding">
             <span class="md-title">{[{ preReq.heading }]}</span>
             <span class="md-subhead"><p>{[{ preReq.description }]}</p></span>
-              <ul>
-                <li ng-repeat="criteria in preReq.list">{[{ criteria }]}</li>
-              </ul>
-            </span>
+            <ul>
+              <li ng-repeat="criteria in preReq.list">{[{ criteria }]}</li>
+            </ul>
           </md-content>
         </md-card>
         <md-card flex="33">
@@ -62,36 +60,49 @@
                   <div layout="column" ng-cloak="" class="md-inline-form">
                     <md-content layout-padding="">
                       <div>
-                        <form name="userForm">
+                        <form name="userForm" ng-submit="register()" novalidate>
                           <md-input-container class="md-block" flex-gt-sm="">
                             <label>First name</label>
-                            <input ng-model="user.firstName">
+                            <input name="fname" ng-blur="fnval=true" ng-model="user.firstName" required>
+                            <div md-auto-hide="false" ng-messages="userForm.fname.$error" ng-if="userForm.$submitted || fnval">
+                              <div id="req" ng-message="required">Required</div>
+                            </div>
                           </md-input-container>
 
                           <md-input-container class="md-block" flex-gt-sm="">
                             <label>Last Name</label>
-                            <input ng-model="theMax">
+                            <input name="lname" ng-blur="lnval=true" ng-model="user.lastName" required>
+                            <div md-auto-hide="false" ng-messages="userForm.lname.$error" ng-if="userForm.$submitted || lnval">
+                              <div id="req" ng-message="required">Required</div>
+                            </div>
                           </md-input-container>
-                          
                           
                           <md-input-container class="md-block" flex-gt-sm="">
                             <label>Email</label>
-                            <input type="email">
+                            <input name="eid" type="email" ng-blur="emval=true" ng-model="user.emailId" eid required>
+                            <div md-auto-hide="false" ng-messages="userForm.eid.$error" ng-if="userForm.$submitted || emval">
+                              <div id="req" ng-message="required">Required</div>
+                              <div id="inveid" ng-message="eid">Invalid Email ID</div>
+                            </div>
                           </md-input-container>
                          
                           <md-input-container class="md-block" flex-gt-sm="">
                             <label>Skype ID</label>
-                            <input>
+                            <input name="skyid" ng-blur="skyval=true" ng-model="user.skypeId" required>
+                            <div md-auto-hide="false" ng-messages="userForm.skyid.$error" ng-if="userForm.$submitted || skyval">
+                              <div id="req" ng-message="required">Required</div>
+                            </div>
                           </md-input-container>
                           
                           <md-input-container class="md-block" flex-gt-sm="">
                             <label>Phone Number</label>
-                            <input>
+                            <input name="phone" ng-model="user.phoneNo" ng-blur="phval=true" phoneno required>
+                            <div md-auto-hide="false" ng-messages="userForm.phone.$error" ng-if="phval || userForm.$submitted">
+                              <div id="req" ng-message="required">Required</div>
+                              <div id="phid" ng-message="phoneno">Invalid Phone Number</div>
+                            </div>
                           </md-input-container>
-                            <md-checkbox class="green" flex-gt-sm="" style>
-                              I agree to the Terms and Conditions.
-                            </md-checkbox>
-                            <md-button class="md-raised" flex-gt-sm="">Register</md-button>
+                            <md-button type="submit" id="reg" class="md-raised" flex-gt-sm="">Register</md-button>
                         </form>
                       </div>
                     </md-content>
